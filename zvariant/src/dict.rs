@@ -112,6 +112,10 @@ impl<'k, 'v> Dict<'k, 'v> {
         &self.signature
     }
 
+    pub(crate) fn entries(&self) -> &[DictEntry<'k, 'v>] {
+        &self.entries
+    }
+
     pub(crate) fn to_owned(&self) -> Dict<'static, 'static> {
         Dict {
             key_signature: self.key_signature.to_owned(),
@@ -219,12 +223,20 @@ where
 // TODO: Conversion of Dict from/to BTreeMap
 
 #[derive(Debug, Clone, PartialEq)]
-struct DictEntry<'k, 'v> {
+pub(crate) struct DictEntry<'k, 'v> {
     key: Value<'k>,
     value: Value<'v>,
 }
 
 impl<'k, 'v> DictEntry<'k, 'v> {
+    pub(crate) fn key(&self) -> &Value<'k> {
+        &self.key
+    }
+
+    pub(crate) fn value(&self) -> &Value<'v> {
+        &self.value
+    }
+
     fn to_owned(&self) -> DictEntry<'static, 'static> {
         DictEntry {
             key: self.key.to_owned().into(),

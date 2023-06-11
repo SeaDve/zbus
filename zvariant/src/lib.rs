@@ -95,6 +95,8 @@ mod signature_parser;
 
 mod container_depths;
 
+mod display;
+
 pub use zvariant_derive::{DeserializeDict, OwnedValue, SerializeDict, Type, TypeDict, Value};
 
 // Required for the macros to function within this crate.
